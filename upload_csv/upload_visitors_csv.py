@@ -1,4 +1,5 @@
 import os
+from csv_file import read_csv_file
 
 
 def get_env_var(env_var_name):
@@ -13,7 +14,7 @@ def get_env_var(env_var_name):
 def get_env_vars():
     global csv_bucket_name
 
-    csv_bucket_name = get_env_var('NEWGARDEN_CSV_DATA_BUCKET')
+    csv_bucket_name = get_env_var('NEWGARDEN_VISITORS_CSV_DATA_BUCKET')
     if csv_bucket_name == '':
         return False
 
@@ -40,7 +41,7 @@ def parse_arguments():
 
 
 def main():
-    print('\nStarting uploadCSV.py ...')
+    print('\nStarting upload_visitors_csv.py ...')
 
     success = get_env_vars()
     if not success:
@@ -57,6 +58,11 @@ def main():
 
     print('Args:')
     print(f'csv_file_name: {csv_file_name}')
+
+    # debug: print CSV file rows
+    rows = read_csv_file(csv_file_name)
+    print('CSV file rows:')
+    print(rows)
 
 
 if __name__ == '__main__':
