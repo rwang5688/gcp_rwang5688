@@ -1,6 +1,6 @@
 #!/bin/bash
 # GCP specific environment variables
-
+export NEWGARDEN_CLOUD_FUNCTIONS_CREDENTIALS_JSON=newgarden-cloud-functions-9f405fe88d29.json
 
 # uploadCSV specific environment variables
 export NEWGARDEN_CUSTOMERS_CSV_DATA_BUCKET=newgarden-customers-csv-data-bucket
