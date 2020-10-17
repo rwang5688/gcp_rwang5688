@@ -1,5 +1,7 @@
 import os
-from csv_file import read_csv_file
+import datetime
+from csv_util import read_csv_file
+from cloud_storage_util import upload_blob
 
 
 def get_env_var(env_var_name):
@@ -13,9 +15,14 @@ def get_env_var(env_var_name):
 
 def get_env_vars():
     global csv_bucket_name
+    global credentials_json
 
     csv_bucket_name = get_env_var('NEWGARDEN_VISITORS_CSV_DATA_BUCKET')
     if csv_bucket_name == '':
+        return False
+
+    credentials_json = get_env_var('NEWGARDEN_CLOUD_FUNCTIONS_CREDENTIALS_JSON')
+    if credentials_json == '':
         return False
 
     # success
@@ -50,6 +57,7 @@ def main():
 
     print('Env vars:')
     print(f'csv_bucket_name: {csv_bucket_name}')
+    print(f'credentials_json: {credentials_json}')
 
     success = parse_arguments()
     if not success:
@@ -63,6 +71,15 @@ def main():
     rows = read_csv_file(csv_file_name)
     print('CSV file rows:')
     print(rows)
+
+    today = datetime.date.today()
+    destination_blob_name = str(today) + "/" + csv_file_name
+    print(f'destination_blob_name: {destination_blob_name}')
+
+    success = upload_blob(credentials_json, csv_bucket_name, csv_file_name, destination_blob_name)
+    if not success:
+        print('upload_blob failed.  Exit.')
+        return
 
 
 if __name__ == '__main__':
