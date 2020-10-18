@@ -14,15 +14,15 @@ def get_env_var(env_var_name):
 
 
 def get_env_vars():
-    global csv_bucket_name
     global credentials_json
+    global csv_bucket_name
+
+    credentials_json = get_env_var('SERVICE_ACCOUNT_CREDENTIALS_JSON')
+    if credentials_json == '':
+        return False
 
     csv_bucket_name = get_env_var('NEWGARDEN_VISITORS_CSV_DATA_BUCKET')
     if csv_bucket_name == '':
-        return False
-
-    credentials_json = get_env_var('NEWGARDEN_CLOUD_FUNCTIONS_CREDENTIALS_JSON')
-    if credentials_json == '':
         return False
 
     # success
@@ -56,8 +56,8 @@ def main():
         return
 
     print('Env vars:')
-    print(f'csv_bucket_name: {csv_bucket_name}')
     print(f'credentials_json: {credentials_json}')
+    print(f'csv_bucket_name: {csv_bucket_name}')
 
     success = parse_arguments()
     if not success:

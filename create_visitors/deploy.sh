@@ -1,8 +1,9 @@
 #!/bin/bash
 # set env vars
-. ./env.sh
+. ../env.sh
 
-gcloud functions deploy --region=us-central1 create_visitors \
+# deploy cloud function
+gcloud functions deploy --region=$TARGET_REGION create_visitors \
 --runtime python38 \
 --trigger-resource $NEWGARDEN_VISITORS_CSV_DATA_BUCKET \
 --trigger-event google.storage.object.finalize
