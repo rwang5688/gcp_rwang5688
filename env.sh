@@ -9,6 +9,7 @@ export PROJECT_ARTIFACTS_BUCKET=$TARGET_COUNTRY.artifacts.$PROJECT_ID.appspot.co
 export FUNCTION_SOURCES_BUCKET=gcf-sources-$PROJECT_NUMBER-$TARGET_REGION
 
 # App specific environment variables
+export NEWGARDEN_SERVICE_ACCOUNT_DATA_BUCKET=newgarden-service-account-data-bucket
 export NEWGARDEN_CUSTOMERS_CSV_DATA_BUCKET=newgarden-customers-csv-data-bucket
 export NEWGARDEN_VISITORS_CSV_DATA_BUCKET=newgarden-visitors-csv-data-bucket
 
