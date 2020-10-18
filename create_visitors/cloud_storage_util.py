@@ -32,7 +32,7 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 
     blob = bucket.blob(destination_blob_name)
     if blob is None:
-        print(f'upload_blob: Failed to get blob {destination_blob_name}')
+        print(f'upload_blob: Failed to get destination blob {destination_blob_name}')
         return False
 
     blob.upload_from_filename(source_file_name)
@@ -40,6 +40,38 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
     print(
         "upload_blob: Uploaded file {} to {} as {}".format(
             source_file_name, bucket_name, destination_blob_name
+        )
+    )
+
+    return True
+
+
+def download_blob(bucket_name, source_blob_name, destination_file_name):
+    """Downloads a file from the bucket."""
+    # bucket_name = "your-bucket-name"
+    # source_blob_name = "storage-object-name"
+    # destination_file_name = "local/path/to/file"
+
+    storage_client = get_storage_client()
+    if storage_client is None:
+        print(f'download_blob: Failed to get storage client.')
+        return False
+
+    bucket = storage_client.bucket(bucket_name)
+    if bucket is None:
+        print(f'download_blob: Failed to get bucket {bucket_name}')
+        return False
+
+    blob = bucket.blob(source_blob_name)
+    if blob is None:
+        print(f'download_blob: Failed to get source blob {source_blob_name}')
+        return False
+
+    blob.download_to_filename(destination_file_name)
+
+    print(
+        "download_blob: Downloaded blob {} from {} as {}".format(
+            source_blob_name, bucket_name, destination_file_name
         )
     )
 
