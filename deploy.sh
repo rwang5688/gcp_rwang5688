@@ -6,7 +6,7 @@
 function make_buckets () {
   for BUCKET in "${BUCKETS[@]}"
   do
-    echo ----------[ deploying $BUCKET ]----------
+    echo ----------[ making $BUCKET ]----------
     gsutil mb -c standard -l $TARGET_REGION gs://$BUCKET
   done
 }

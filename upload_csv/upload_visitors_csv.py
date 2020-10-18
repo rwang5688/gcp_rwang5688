@@ -1,7 +1,7 @@
 import os
 import datetime
 from csv_util import read_csv_file
-from cloud_storage_util import upload_blob
+from cloud_storage_util import set_credentials_json, upload_blob
 
 
 def get_env_var(env_var_name):
@@ -14,11 +14,11 @@ def get_env_var(env_var_name):
 
 
 def get_env_vars():
-    global credentials_json
+    global credentials_json_path
     global csv_bucket_name
 
-    credentials_json = get_env_var('SERVICE_ACCOUNT_CREDENTIALS_JSON')
-    if credentials_json == '':
+    credentials_json_path = get_env_var('SERVICE_ACCOUNT_CREDENTIALS_JSON')
+    if credentials_json_path == '':
         return False
 
     csv_bucket_name = get_env_var('NEWGARDEN_VISITORS_CSV_DATA_BUCKET')
@@ -56,7 +56,7 @@ def main():
         return
 
     print('Env vars:')
-    print(f'credentials_json: {credentials_json}')
+    print(f'credentials_json_path: {credentials_json_path}')
     print(f'csv_bucket_name: {csv_bucket_name}')
 
     success = parse_arguments()
@@ -76,7 +76,8 @@ def main():
     destination_blob_name = str(today) + "/" + csv_file_name
     print(f'destination_blob_name: {destination_blob_name}')
 
-    success = upload_blob(credentials_json, csv_bucket_name, csv_file_name, destination_blob_name)
+    set_credentials_json(credentials_json_path)
+    success = upload_blob(csv_bucket_name, csv_file_name, destination_blob_name)
     if not success:
         print('upload_blob failed.  Exit.')
         return
