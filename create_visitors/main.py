@@ -1,5 +1,11 @@
 from cloud_storage_util import set_credentials_json, download_blob
 from csv_util import read_csv_file
+from credentials_util import get_credentials
+from google_sheets_util import get_sheets, get_header
+
+
+VISITORS_SPREADSHEET_ID = '1NX2DQrM2WlVpZdUQHqoSy9jFQHiI-JlWtxCPaMVPKpk'
+VISITORS_HEADER_RANGE_NAME = 'Visitors!A1:AI1'
 
 
 def preamble(event, context):
@@ -35,6 +41,28 @@ def read_csv_file_based_on_event(event):
     return read_csv_file(tmp_file_name)
 
 
+def get_credentials_and_sheets():
+    credentials = get_credentials()
+    if credentials is None:
+        print('get_visitor_header: Failed to get_credentials.')
+        return None
+
+    # debug
+    print(f'get_visitors_header: credentials={credentials}.')
+
+    sheets = get_sheets(credentials)
+    if sheets is None:
+        print('get_visitors_header: Failed to get_sheets.')
+        return None
+
+    return sheets
+
+
+def get_visitors_header(sheets):
+    visitors_header = get_header(sheets, VISITORS_SPREADSHEET_ID, VISITORS_HEADER_RANGE_NAME)
+    return visitors_header
+
+
 def create_visitors(event, context):
     """Background Cloud Function to be triggered by Cloud Storage.
        This generic function logs relevant data when a file is changed.
@@ -64,6 +92,21 @@ def create_visitors(event, context):
         return
 
     # debug
-    print('CSV file rows:')
+    print('create_visitors: CSV file rows:')
     print(rows)
+
+    sheets = get_credentials_and_sheets()
+    if sheets is None:
+        print('create_visitors: Failed to get_credentials_and_sheets.')
+        print('Exit.')
+        return
+
+    visitors_header = get_visitors_header(sheets)
+    if visitors_header is None:
+        print('creaete_visitors: Failed to get_visitors_header.')
+        print('Exit.')
+        return
+
+    # debug
+    print(f'create_visitors: visitors_header={visitors_header}.')
 
