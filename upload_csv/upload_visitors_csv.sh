@@ -1,6 +1,6 @@
 #!/bin/bash
 # set env vars
-. ./env.sh
+. ../env.sh
 
 # upload CSV file
 echo "[CMD] python3 upload_visitors_csv.py $1"
