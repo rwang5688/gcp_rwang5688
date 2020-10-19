@@ -26,24 +26,37 @@ def create_visitors(event, context):
     """
     preamble(event, context)
 
-    rows = read_csv_file_based_on_event(event)
-    if rows is None:
+    csv_rows = read_csv_file_based_on_event(event)
+    if csv_rows is None:
         print('create_visitors: Failed to read_csv_file_based_on_event.')
         print(f'event: {event}')
         print('Exit.')
         return
 
     # debug
-    print('create_visitors: CSV file rows:')
-    print(rows)
+    print('create_visitors: csv_rows:')
+    print(csv_rows)
 
-    visitors_wks = VisitorsWorksheet()
-    visitors_header = visitors_wks.get_header()
-    if visitors_header is None:
-        print('creaete_visitors: Failed to VisitorsWorksheet.get_header.')
+    visitors_worksheet = VisitorsWorksheet()
+    if visitors_worksheet is None:
+        print('create_visitors: Failed to initialize VisitorsWorksheet.')
         print('Exit.')
         return
 
     # debug
-    print(f'create_visitors: visitors_header={visitors_header}.')
+    print(f'create_visitors: visitors_worksheet:')
+    print(visitors_worksheet)
+    visitors_worksheet_rows = visitors_worksheet.get_worksheet_rows()
+    visitors_worksheet_columns = visitors_worksheet.get_worksheet_columns()
+    print(f'create_visitors: visitors_worksheet_rows={visitors_worksheet_rows}.')
+    print(f'create_visitors: visitors_worksheet_columns={visitors_worksheet_columns}.')
+
+    visitors_worksheet_headers = visitors_worksheet.get_worksheet_headers()
+    if visitors_worksheet_headers is None:
+        print('create_visitors: Failed to VisitorsWorksheet.get_worksheet_headers.')
+        print('Exit.')
+        return
+
+    # debug
+    print(f'create_visitors: visitors_worksheet_headers={visitors_worksheet_headers}.')
 

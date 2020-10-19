@@ -12,6 +12,4 @@ export SERVICE_ACCOUNT_CREDENTIALS_JSON=$PROJECT_ID-9f405fe88d29.json
 export SERVICE_ACCOUNT_DATA_BUCKET=newgarden-service-account-data-bucket
 export NEWGARDEN_CUSTOMERS_CSV_DATA_BUCKET=newgarden-customers-csv-data-bucket
 export NEWGARDEN_VISITORS_CSV_DATA_BUCKET=newgarden-visitors-csv-data-bucket
-export NEWGARDEN_VISITORS_SPREADSHEET_ID="1NX2DQrM2WlVpZdUQHqoSy9jFQHiI-JlWtxCPaMVPKpk"
-export NEWGARDEN_VISITORS_HEADER_RANGE_NAME="Visitors!A1:AI1"
 

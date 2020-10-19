@@ -1,24 +1,23 @@
 from env_var import get_env_var
 from credentials_util import get_credentials
-from google_sheets_util import get_sheets, get_header
+import pygsheets
 
 
 class VisitorsWorksheet:
     def __init__(self):
-        self.credentials = None
-        self.sheets = None
         success = self.set_credentials()
         if not success:
-            print('VisitorsWorksheet.__init__: Failed to set_credentials.')
             return
 
-        print(f'VisitorsSheet.__init__: self.credentials={self.credentials}.')
+        self.client = pygsheets.authorize(custom_credentials=self.credentials)
+        if self.client is None:
+            return
 
-        success = self.set_sheets()
+        success = self.set_worksheet()
         if not success:
-            print('VisitorsWorksheet.__init__: Failed to set_sheets.')
             return
 
+        print('VisitorsWorksheet.__init__: Connected to Visitors worksheet.')
 
 
     def set_credentials(self):
@@ -27,27 +26,45 @@ class VisitorsWorksheet:
             print('VisitorsWorksheet.set_credentials: Failed to get_credentials.')
             return False
 
+        print(f'VisitorsSheet.set_credentials: self.credentials={self.credentials}.')
         return True
 
 
-    def set_sheets(self):
-        self.sheets = get_sheets(self.credentials)
-        if self.sheets is None:
-            print('VisitorsWorksheet.set_sheets: Failed to get_sheets.')
+    def set_worksheet(self):
+        spreadsheet_id = get_env_var('NEWGARDEN_VISITORS_SPREADSHEET_ID')
+        if spreadsheet_id == '':
+            return False
+
+        self.sheet = self.client.open_by_key(spreadsheet_id)
+        if self.sheet is None:
+            print('VisitorsWorksheet.set_worksheet: Failed to open spreadsheet by key.')
+            return False
+
+        worksheet_title = get_env_var('NEWGARDEN_VISITORS_WORKSHEET_TITLE')
+        if worksheet_title == '':
+            return False
+
+        self.worksheet = self.sheet.worksheet_by_title(worksheet_title)
+        if self.worksheet is None:
+            print('VisitorsWorksheet.set_worksheet: Failed to get worksheet by title.')
             return False
 
         return True
 
 
-    def get_header(self):
-        spreadsheet_id = get_env_var('NEWGARDEN_VISITORS_SPREADSHEET_ID')
-        if spreadsheet_id == '':
-            return None
+    def get_worksheet_rows(self):
+        return self.worksheet.rows
 
-        header_range_name = get_env_var('NEWGARDEN_VISITORS_HEADER_RANGE_NAME')
-        if header_range_name == '':
-            return None
 
-        header = get_header(self.sheets, spreadsheet_id, header_range_name)
-        return header
+    def get_worksheet_columns(self):
+        return self.worksheet.cols
+
+
+    def get_worksheet_headers(self):
+        worksheet_headers = self.worksheet.get_row(1, include_tailing_empty=False)
+        return worksheet_headers
+
+
+    def add_worksheet_rows(self, rows):
+        self.worksheet.add_rows(rows)
 
