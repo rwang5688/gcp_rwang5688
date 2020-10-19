@@ -4,6 +4,9 @@ import json
 from google.oauth2 import service_account
 
 
+SCOPES = ('https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive')
+
+
 def download_credentials():
     bucket_name = get_env_var('SERVICE_ACCOUNT_DATA_BUCKET')
     if bucket_name == '':
@@ -34,7 +37,7 @@ def get_credentials():
     tmp_file_name = '/tmp/' + credentials_json_path
     with open(tmp_file_name) as credentials_json_file:
         info = json.load(credentials_json_file)
-        credentials = service_account.Credentials.from_service_account_info(info)
+        credentials = service_account.Credentials.from_service_account_info(info, scopes=SCOPES)
 
     return credentials
 
