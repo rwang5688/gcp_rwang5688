@@ -24,7 +24,7 @@ function deploy_functions () {
 
 
 # create global resources
-BUCKETS=($NEWGARDEN_SERVICE_ACCOUNT_DATA_BUCKET \
+BUCKETS=($SERVICE_ACCOUNT_DATA_BUCKET \
             $NEWGARDEN_CUSTOMERS_CSV_DATA_BUCKET \
             $NEWGARDEN_VISITORS_CSV_DATA_BUCKET)
 make_buckets
