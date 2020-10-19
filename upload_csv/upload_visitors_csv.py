@@ -1,16 +1,7 @@
-import os
+from env_var import get_env_var
 import datetime
 from csv_util import read_csv_file
 from cloud_storage_util import set_credentials_json, upload_blob
-
-
-def get_env_var(env_var_name):
-    env_var = ''
-    if env_var_name in os.environ:
-        env_var = os.environ[env_var_name]
-    else:
-        print(f'get_env_var: Failed to get {env_var_name}.')
-    return env_var
 
 
 def get_env_vars():

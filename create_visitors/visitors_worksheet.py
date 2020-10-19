@@ -1,9 +1,6 @@
+from env_var import get_env_var
 from credentials_util import get_credentials
 from google_sheets_util import get_sheets, get_header
-
-
-VISITORS_SPREADSHEET_ID = '1NX2DQrM2WlVpZdUQHqoSy9jFQHiI-JlWtxCPaMVPKpk'
-VISITORS_HEADER_RANGE_NAME = 'Visitors!A1:AI1'
 
 
 class VisitorsWorksheet:
@@ -43,6 +40,14 @@ class VisitorsWorksheet:
 
 
     def get_header(self):
-        header = get_header(self.sheets, VISITORS_SPREADSHEET_ID, VISITORS_HEADER_RANGE_NAME)
+        spreadsheet_id = get_env_var('NEWGARDEN_VISITORS_SPREADSHEET_ID')
+        if spreadsheet_id == '':
+            return None
+
+        header_range_name = get_env_var('NEWGARDEN_VISITORS_HEADER_RANGE_NAME')
+        if header_range_name == '':
+            return None
+
+        header = get_header(self.sheets, spreadsheet_id, header_range_name)
         return header
 
