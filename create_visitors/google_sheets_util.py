@@ -9,7 +9,7 @@ def get_sheets(credentials):
 
 def get_header(sheets, spreadsheet_id, header_range_name):
     result = sheets.values().get(spreadsheetId=spreadsheet_id,
-                                range=header_range_name).execute()
+                                    range=header_range_name).execute()
     header = result.get('values', [])
     return header
 
