@@ -44,12 +44,9 @@ def create_visitors(event, context):
         return
 
     # debug
-    print(f'create_visitors: visitors_worksheet:')
-    print(visitors_worksheet)
-    visitors_worksheet_rows = visitors_worksheet.get_worksheet_rows()
-    visitors_worksheet_columns = visitors_worksheet.get_worksheet_columns()
-    print(f'create_visitors: visitors_worksheet_rows={visitors_worksheet_rows}.')
-    print(f'create_visitors: visitors_worksheet_columns={visitors_worksheet_columns}.')
+    print(f'create_visitors: visitors_worksheet.worksheet={visitors_worksheet.worksheet}')
+    print(f'create_visitors: worksheet.rows={visitors_worksheet.worksheet.rows}.')
+    print(f'create_visitors: worksheet.cols={visitors_worksheet.worksheet.cols}.')
 
     visitors_worksheet_headers = visitors_worksheet.get_worksheet_headers()
     if visitors_worksheet_headers is None:
@@ -59,4 +56,11 @@ def create_visitors(event, context):
 
     # debug
     print(f'create_visitors: visitors_worksheet_headers={visitors_worksheet_headers}.')
+
+    visitors_worksheet.add_csv_rows(csv_rows)
+
+    # debug
+    print(f'create_visitors: visitors_worksheet.worksheet={visitors_worksheet.worksheet}')
+    print(f'create_visitors: worksheet.rows={visitors_worksheet.worksheet.rows}.')
+    print(f'create_visitors: worksheet.cols={visitors_worksheet.worksheet.cols}.')
 

@@ -52,19 +52,38 @@ class VisitorsWorksheet:
         return True
 
 
-    def get_worksheet_rows(self):
-        return self.worksheet.rows
-
-
-    def get_worksheet_columns(self):
-        return self.worksheet.cols
-
-
     def get_worksheet_headers(self):
         worksheet_headers = self.worksheet.get_row(1, include_tailing_empty=False)
         return worksheet_headers
 
 
-    def add_worksheet_rows(self, rows):
-        self.worksheet.add_rows(rows)
+    def add_csv_row(self, csv_row):
+        # note: each csv_row is a dict
+        headers = self.get_worksheet_headers()
+        keys = csv_row.keys()
+        # debug
+        print(f'VisitorsWorksheet.add_csv_row: headers={headers}')
+        print(f'VisitorsWorksheet.add_csv_row: keys={keys}')
+
+        values = []
+        for header in headers:
+            value = ''
+            if header in keys:
+                value = csv_row[header]
+                # debug
+                print(f'VisitorsWorksheet.add_csv_row: header={header}, value={value}')
+            values.append(value)
+
+        last_row = self.worksheet.rows
+        self.worksheet.insert_rows(last_row, number=1, values=values, inherit=True)
+
+
+    def add_csv_rows(self, csv_rows):
+        rows_before = self.worksheet.rows
+        for csv_row in csv_rows:
+            self.add_csv_row(csv_row)
+        rows_after = self.worksheet.rows
+        rows_added = rows_after - rows_before
+        # debug
+        print(f'VisitorsWorksheet.add_csv_rows: added {rows_added} rows.')
 
