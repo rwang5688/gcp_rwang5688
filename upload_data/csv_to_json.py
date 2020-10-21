@@ -31,9 +31,9 @@ def main():
     print('Args:')
     print(f'csv_file_name: {csv_file_name}')
 
-    csv_rows = read_csv_file(csv_file_name)
-    print('CSV rows:')
-    print(csv_rows)
+    data_rows = read_csv_file(csv_file_name)
+    print('data_rows:')
+    print(data_rows)
 
     file_name_base = csv_file_name.split('.')[0]
     print(f'file_name_base: {file_name_base}')
@@ -41,7 +41,7 @@ def main():
     json_file_name = file_name_base + '.json'
     print(f'json_file_name: {json_file_name}')
 
-    success = write_json_file(json_file_name, csv_rows)
+    success = write_json_file(json_file_name, data_rows)
     if not success:
         print('write_json_file failed.  Exit.')
         return
