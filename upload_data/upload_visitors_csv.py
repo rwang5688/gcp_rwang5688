@@ -1,6 +1,6 @@
 from env_var import get_env_var
-import datetime
 from csv_util import read_csv_file
+import datetime
 from cloud_storage_util import set_credentials_json, upload_blob
 
 
@@ -58,10 +58,10 @@ def main():
     print('Args:')
     print(f'csv_file_name: {csv_file_name}')
 
-    # debug: print CSV file rows
-    rows = read_csv_file(csv_file_name)
-    print('CSV file rows:')
-    print(rows)
+    # debug: read and print CSV rows
+    csv_rows = read_csv_file(csv_file_name)
+    print('CSV rows:')
+    print(csv_rows)
 
     today = datetime.date.today()
     destination_blob_name = str(today) + "/" + csv_file_name

@@ -1,0 +1,28 @@
+[
+    {
+        "Action": "Create",
+        "VisitorNumber": "V8888",
+        "VisitorName": "張三",
+        "VisitorMobile": "0988-888-888",
+        "VisitorPhone": "02-8888-8888",
+        "CaseType": "遷移",
+        "CaseSource": "業者",
+        "Referral1": "台北",
+        "Referral2": "仁本",
+        "ReferralGuide": "李四",
+        "RepName": "王五"
+    },
+    {
+        "Action": "Create",
+        "VisitorNumber": "V9999",
+        "VisitorName": "趙錢",
+        "VisitorMobile": "0988-888-888",
+        "VisitorPhone": "02-8888-8888",
+        "CaseType": "益壽",
+        "CaseSource": "業者",
+        "Referral1": "圓廣",
+        "Referral2": "弘願",
+        "ReferralGuide": "孫李",
+        "RepName": "周吳"
+    }
+]
