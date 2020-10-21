@@ -37,9 +37,14 @@ def main():
 
     file_name_base = csv_file_name.split('.')[0]
     print(f'file_name_base: {file_name_base}')
+
     json_file_name = file_name_base + '.json'
     print(f'json_file_name: {json_file_name}')
-    write_json_file(json_file_name, csv_rows)
+
+    success = write_json_file(json_file_name, csv_rows)
+    if not success:
+        print('write_json_file failed.  Exit.')
+        return
 
 
 if __name__ == '__main__':
