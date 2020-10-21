@@ -13,10 +13,10 @@ def read_json_file(json_file_name):
     return rows
 
 
-def write_json_file(json_file_name, rows):
-    # rows is a list of dict
-    if len(rows) == 0:
-        print('write_csv_file: No rows to write.')
+def write_json_file(json_file_name, data_rows):
+    # data_rows is a list of dict
+    if len(data_rows) == 0:
+        print('write_csv_file: No data rows to write.')
         return False
 
     with open(json_file_name, encoding='utf-8', mode='w') as json_file:
@@ -24,7 +24,7 @@ def write_json_file(json_file_name, rows):
             print(f'write_json_file: Failed to open json file {json_file_name}.')
             return False
 
-        json.dump(rows, json_file, ensure_ascii=False, indent=4)
+        json.dump(data_rows, json_file, ensure_ascii=False, indent=4)
 
     return True
 

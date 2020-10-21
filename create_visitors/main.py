@@ -1,4 +1,4 @@
-from event_to_csv import read_csv_file_based_on_event
+from event_to_data_rows import read_json_file_based_on_event
 from visitors_worksheet import VisitorsWorksheet
 
 
@@ -26,16 +26,16 @@ def create_visitors(event, context):
     """
     preamble(event, context)
 
-    csv_rows = read_csv_file_based_on_event(event)
-    if csv_rows is None:
+    data_rows = read_json_file_based_on_event(event)
+    if data_rows is None:
         print('create_visitors: Failed to read_csv_file_based_on_event.')
         print(f'event: {event}')
         print('Exit.')
         return
 
     # debug
-    print('create_visitors: csv_rows:')
-    print(csv_rows)
+    print('create_visitors: data_rows:')
+    print(data_rows)
 
     visitors_worksheet = VisitorsWorksheet()
     if visitors_worksheet is None:
@@ -57,7 +57,7 @@ def create_visitors(event, context):
     # debug
     print(f'create_visitors: visitors_worksheet_headers={visitors_worksheet_headers}.')
 
-    visitors_worksheet.add_csv_rows(csv_rows)
+    visitors_worksheet.add_data_rows(data_rows)
 
     # debug
     print(f'create_visitors: visitors_worksheet.worksheet={visitors_worksheet.worksheet}')

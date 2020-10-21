@@ -1,5 +1,6 @@
 from cloud_storage_util import set_credentials_json, download_blob
 from csv_util import read_csv_file
+from json_util import read_json_file
 
 
 def get_tmp_file_name(blob_name):
@@ -27,4 +28,16 @@ def read_csv_file_based_on_event(event):
     source_blob_name = event['name']
     tmp_file_name = get_tmp_file_name(source_blob_name)
     return read_csv_file(tmp_file_name)
+
+
+def read_json_file_based_on_event(event):
+    success = download_blob_based_on_event(event)
+    if not success:
+        print('read_json_file_based_on_event: Failed to download_blob_based_on_event.')
+        print(f'event: {event}')
+        return None
+
+    source_blob_name = event['name']
+    tmp_file_name = get_tmp_file_name(source_blob_name)
+    return read_json_file(tmp_file_name)
 

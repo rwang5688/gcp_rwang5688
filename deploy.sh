@@ -25,8 +25,8 @@ function deploy_functions () {
 
 # create global resources
 BUCKETS=($SERVICE_ACCOUNT_DATA_BUCKET \
-            $NEWGARDEN_CUSTOMERS_CSV_DATA_BUCKET \
-            $NEWGARDEN_VISITORS_CSV_DATA_BUCKET)
+            $NEWGARDEN_CUSTOMERS_DATA_BUCKET \
+            $NEWGARDEN_VISITORS_DATA_BUCKET)
 make_buckets
 
 # deploy cloud functions

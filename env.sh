@@ -10,6 +10,6 @@ export FUNCTION_SOURCES_BUCKET=gcf-sources-$PROJECT_NUMBER-$TARGET_REGION
 # App specific environment variables
 export SERVICE_ACCOUNT_CREDENTIALS_JSON=$PROJECT_ID-9f405fe88d29.json
 export SERVICE_ACCOUNT_DATA_BUCKET=newgarden-service-account-data-bucket
-export NEWGARDEN_CUSTOMERS_CSV_DATA_BUCKET=newgarden-customers-csv-data-bucket
-export NEWGARDEN_VISITORS_CSV_DATA_BUCKET=newgarden-visitors-csv-data-bucket
+export NEWGARDEN_CUSTOMERS_DATA_BUCKET=newgarden-customers-data-bucket
+export NEWGARDEN_VISITORS_DATA_BUCKET=newgarden-visitors-data-bucket
 

@@ -57,19 +57,19 @@ class VisitorsWorksheet:
         return worksheet_headers
 
 
-    def add_csv_row(self, csv_row):
-        # note: each csv_row is a dict
+    def add_data_row(self, data_row):
+        # data_row is a dict
         headers = self.get_worksheet_headers()
-        keys = csv_row.keys()
+        keys = data_row.keys()
         # debug
-        print(f'VisitorsWorksheet.add_csv_row: headers={headers}')
-        print(f'VisitorsWorksheet.add_csv_row: keys={keys}')
+        print(f'VisitorsWorksheet.add_data_row: headers={headers}')
+        print(f'VisitorsWorksheet.add_data_row: keys={keys}')
 
         values = []
         for header in headers:
             value = ''
             if header in keys:
-                value = csv_row[header]
+                value = data_row[header]
                 # debug
                 print(f'VisitorsWorksheet.add_csv_row: header={header}, value={value}')
             values.append(value)
@@ -78,10 +78,11 @@ class VisitorsWorksheet:
         self.worksheet.insert_rows(last_row, number=1, values=values, inherit=True)
 
 
-    def add_csv_rows(self, csv_rows):
+    def add_data_rows(self, data_rows):
+        # data_rows is a list of dict
         rows_before = self.worksheet.rows
-        for csv_row in csv_rows:
-            self.add_csv_row(csv_row)
+        for data_row in data_rows:
+            self.add_data_row(data_row)
         rows_after = self.worksheet.rows
         rows_added = rows_after - rows_before
         # debug
