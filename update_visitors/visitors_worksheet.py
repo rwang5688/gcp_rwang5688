@@ -17,6 +17,10 @@ class VisitorsWorksheet:
         if not success:
             return
 
+        success = self.set_worksheet_headers()
+        if not success:
+            return
+
         print('VisitorsWorksheet.__init__: Connected to Visitors worksheet.')
 
 
@@ -52,14 +56,19 @@ class VisitorsWorksheet:
         return True
 
 
-    def get_worksheet_headers(self):
-        worksheet_headers = self.worksheet.get_row(1, include_tailing_empty=False)
-        return worksheet_headers
+    def set_worksheet_headers(self):
+        self.worksheet_headers = self.worksheet.get_row(1, include_tailing_empty=True)
+        enumerated_headers = list(enumerate(self.worksheet_headers))
+        enumerated_headers = [tuple_object for tuple_object in enumerated_headers if tuple_object[1]]
+        pos_headers_lookup_table = dict(enumerated_headers)
+        self.worksheet_headers_pos_lookup_table = {value: key for key, value in pos_headers_lookup_table.items()}
+
+        return True
 
 
     def add_data_row(self, data_row):
         # data_row is a dict
-        headers = self.get_worksheet_headers()
+        headers = self.worksheet_headers
         keys = data_row.keys()
         # debug
         print(f'VisitorsWorksheet.add_data_row: headers={headers}')
