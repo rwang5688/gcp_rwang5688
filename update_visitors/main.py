@@ -57,7 +57,7 @@ def update_visitors(event, context):
     # debug
     print(f'update_visitors: visitors_worksheet_headers={visitors_worksheet_headers}.')
 
-    visitors_worksheet.add_data_rows(data_rows)
+    visitors_worksheet.update_data_rows(data_rows)
 
     # debug
     print(f'update_visitors: visitors_worksheet.worksheet={visitors_worksheet.worksheet}')
