@@ -24,7 +24,7 @@ function remove_functions () {
 
 
 # remove cloud functions
-FUNCTIONS=(create_visitors)
+FUNCTIONS=(update_visitors)
 remove_functions
 
 # remove project artifacts and function sources buckets

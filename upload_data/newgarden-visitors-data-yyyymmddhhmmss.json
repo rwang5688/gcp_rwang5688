@@ -1,6 +1,6 @@
 [
     {
-        "Action": "Create",
+        "Action": "Update",
         "VisitorNumber": "V8888",
         "VisitorName": "張三",
         "VisitorMobile": "0988-888-888",
@@ -13,7 +13,7 @@
         "RepName": "王五"
     },
     {
-        "Action": "Create",
+        "Action": "Update",
         "VisitorNumber": "V9999",
         "VisitorName": "趙錢",
         "VisitorMobile": "0999-999-999",

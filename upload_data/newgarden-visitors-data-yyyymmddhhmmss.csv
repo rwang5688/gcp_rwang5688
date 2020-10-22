@@ -1,3 +1,3 @@
 Action,VisitorNumber,VisitorName,VisitorMobile,VisitorPhone,CaseType,CaseSource,Referral1,Referral2,ReferralGuide,RepName
-Create,V8888,張三,0988-888-888,02-8888-8888,遷移,業者,台北,仁本,李四,王五
-Create,V9999,趙錢,0999-999-999,02-9999-9999,益壽,業者,圓廣,弘願,孫李,周吳
+Update,V8888,張三,0988-888-888,02-8888-8888,遷移,業者,台北,仁本,李四,王五
+Update,V9999,趙錢,0999-999-999,02-9999-9999,益壽,業者,圓廣,弘願,孫李,周吳
