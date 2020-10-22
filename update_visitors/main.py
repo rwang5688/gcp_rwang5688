@@ -48,14 +48,12 @@ def update_visitors(event, context):
     print(f'update_visitors: worksheet.rows={visitors_worksheet.worksheet.rows}.')
     print(f'update_visitors: worksheet.cols={visitors_worksheet.worksheet.cols}.')
 
-    visitors_worksheet_headers = visitors_worksheet.get_worksheet_headers()
-    if visitors_worksheet_headers is None:
-        print('update_visitors: Failed to VisitorsWorksheet.get_worksheet_headers.')
-        print('Exit.')
-        return
+    visitors_worksheet_headers = visitors_worksheet.worksheet_headers
+    visitors_worksheet_headers_pos_lookup_table = visitors_worksheet.worksheet_headers_pos_lookup_table
 
     # debug
     print(f'update_visitors: visitors_worksheet_headers={visitors_worksheet_headers}.')
+    print(f'update_visitors: visitors_worksheet_headers_pos_lookup_table={visitors_worksheet_headers_pos_lookup_table}')
 
     visitors_worksheet.update_data_rows(data_rows)
 
