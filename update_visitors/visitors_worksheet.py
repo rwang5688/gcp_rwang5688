@@ -71,14 +71,14 @@ class VisitorsWorksheet:
             if header in keys:
                 value = data_row[header]
                 # debug
-                print(f'VisitorsWorksheet.add_csv_row: header={header}, value={value}')
+                print(f'VisitorsWorksheet.add_data_row: header={header}, value={value}')
             values.append(value)
 
         last_row = self.worksheet.rows
         self.worksheet.insert_rows(last_row, number=1, values=values, inherit=True)
 
 
-    def add_data_rows(self, data_rows):
+    def update_data_rows(self, data_rows):
         # data_rows is a list of dict
         rows_before = self.worksheet.rows
         for data_row in data_rows:
@@ -86,5 +86,5 @@ class VisitorsWorksheet:
         rows_after = self.worksheet.rows
         rows_added = rows_after - rows_before
         # debug
-        print(f'VisitorsWorksheet.add_csv_rows: added {rows_added} rows.')
+        print(f'VisitorsWorksheet.update_data_rows: added {rows_added} rows.')
 

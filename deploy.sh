@@ -30,6 +30,6 @@ BUCKETS=($SERVICE_ACCOUNT_DATA_BUCKET \
 make_buckets
 
 # deploy cloud functions
-FUNCTIONS=(create_visitors)
+FUNCTIONS=(update_visitors)
 deploy_functions
 
